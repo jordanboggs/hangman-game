@@ -62,3 +62,33 @@ As user makes guesses, the following is possible:
       Guesses remaining resets
       Bank of guessed letters resets to empty
       
+
+
+      word as string --- .split() will break the string into a 
+      single index of an array
+
+      .push() --- allows you to add a value to an array
+
+      .toLowerCase() to normalize the data
+
+
+!!!!! IMPORTANT !!!!!
+THIS IS HOW YOU CHECK IF A LETTER IS IN THE WORD
+
+function vowelChecker(x) 
+{
+  var vowels = ['a', 'e', 'i', 'o', 'u', 'y'];
+  var isVowel = false;
+  for (i = 0; i < vowels.length; i++){
+    if (x === vowels[i]){
+      isVowel = true;
+    } 
+  }
+  if (isVowel === true){
+    console.log("That's a vowel");
+  } else {
+    console.log("Not a vowel");
+  }
+}
+vowelChecker("i");
+vowelChecker("z");
