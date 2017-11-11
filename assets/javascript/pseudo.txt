@@ -1,0 +1,64 @@
+H A N G M A N
+
+Requirements:
+  * Keep track of wins
+  * Show the current word as a series of blanks. Fill in the 
+    blanks as words are guessted correctly.
+  * Keep track of number of guesses -- there is a limit.
+    It doesn't have to be a hangman that is drawn on the screen,
+    displaying numbers is just as good.
+  * Display letters that were already guessed.
+    If a letter is guessed more than once, only the first guess 
+    counts as a penalty.
+  * After user wins or loses, the next word should automatically 
+    come up.
+
+There is an array of all possible words to be solved
+  e.g., if the theme is Steven Universe characters:
+  ["garnet", "amethyst", "pearl", "steven", "greg"]
+
+Wins and losses initially set to 0
+  Display on page as 0
+
+Guesses initially set to 0
+  Resets every time we have a new word
+
+"Already guessed letters" (need a better name for that) is 
+  initially empty. Perhaps an empty array that we add to and
+  then wipe out when the round is over.
+
+RNG will pick which of these words to solve.
+  We should probably keep track of which words were already used
+  so we don't have repeats, but that seems like a bonus feature.
+
+Page updates with appropriate number of blanks
+  e.g., if the word is "garnet", the page will display:
+  _ _ _ _ _ _
+
+As user makes guesses, the following is possible:
+  Correct guess
+    Blank is replaced by the correct letter. E.g., if user
+    guesses "A", page would be updated to
+    _ A _ _ _ _
+  Incorrect guess
+    "Number of guesses remaining" decriments by 1
+    "Already guessed letters" bank adds the letter and displays
+    on page
+  Final correct guess
+    Last blank fills in (e.g., G A R N E T with no blanks)
+    Some sort of fanfare or congratulation
+    "Wins" increments by 1
+    A new word is chosen
+      New set of blanks are drawn
+      Guesses remaining resets
+      Bank of guessed letters resets to empty
+  Final incorrect guess
+    "Number of guesses remaining" decriments and reaches 0
+    The incorrect letter is added to the bank
+    Some sort of "you lose" screen
+    "Losses" increments by 1
+    A new word is chosen
+      New set of blanks are drawn
+      Guesses remaining resets
+      Bank of guessed letters resets to empty
+      
