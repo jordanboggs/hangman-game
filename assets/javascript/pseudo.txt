@@ -84,11 +84,55 @@ function vowelChecker(x)
       isVowel = true;
     } 
   }
-  if (isVowel === true){
+  if (isVowel === true){ 
     console.log("That's a vowel");
   } else {
     console.log("Not a vowel");
   }
 }
-vowelChecker("i");
-vowelChecker("z");
+
+------
+!!!!! IMPORTANT !!!!!
+FLOW CHART
+
+word bank
+  ---select a word at random-->
+    ---break down the word into an array-->
+      function doesTheLetterBelong (arrayFromWordbank, userGuess) {
+        var doesItMatch = false;
+        for (i = 0; i < arrayFromWordbank.length, i++) {
+          if (userGuess === arrayFromWordbank[i]) {
+            doesItMatch = true;
+          }
+        }
+        if (doesItMatch === true) {
+          // Put it up on the board
+        } else {
+          // Guess count decriments, wrong letter goes in wrong letter array
+        }
+      }
+
+
+
+-------
+!!!!! IMPORTANT !!!!!
+This is how you detect keypresses in case you forgot
+
+document.onkeyup = function(event) {
+        var keyPress = event.key;
+
+        if (keyPress === "f") {
+          car.driveToWork();
+        } else if (keyPress ==="u") {
+          car.driveAroundWorld();
+        } else if (keyPress === "n") {
+          car.getTuneUp();
+        } else if (keyPress === "k") {
+          car.honk();
+        } else {
+          console.log("Invalid key");
+        }
+        printStats();
+      }
+
+       
