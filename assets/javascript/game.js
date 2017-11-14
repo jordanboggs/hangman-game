@@ -36,21 +36,23 @@ function drawBlanks(wordSelection) {
   return underscoreArray;
 }
 
+// playSpace is defined as an array of underscores that are the length of the word we randomly selected
 var playSpace = drawBlanks(activeWord);
 
 // This function draws the playSpace array under #play-space
 function drawPlaySpace() {
   for (i = 0; i < playSpace.length; i++) {
-    document.getElementById("play-space").innerHTML = playSpace.join('');
+    document.getElementById("play-space").innerHTML = playSpace.join(' ');
   }
 }
 
+// Ok friends let's put them on the board _ _ _ _ !
 drawPlaySpace();
 
 // Capture user's keypress
 document.onkeyup = function(event) {
   var keyPress = event.key;
-  checkLetter(activeWord, keyPress);
+  checkLetter(activeWord, keyPress);                // Let's check to see if the guess was correct by comparing the Word to the keypress
 };
 
 // Checks to see if a guess is correct
@@ -61,21 +63,21 @@ function checkLetter (wordSelection, playerGuess) {
   var doesItMatch = false;
   console.log("Does it match:",doesItMatch);
 
-  for (i = 0; i < wordSelection.length; i++) {
-    if (playerGuess === wordSelection[i]) {
-      doesItMatch = true;
-      playSpace[i] = playerGuess;
-    }
+  for (i = 0; i < wordSelection.length; i++) {      // for every character in the word, do this:
+    if (playerGuess === wordSelection[i]) {         // if the player's guess is the same as the (1st, 2nd, 3rd, etc.) character of the word:
+      doesItMatch = true;                           // mark it as true
+      playSpace[i] = playerGuess;                   // (1st, 2nd, 3rd, etc.) character is set to be the player's guess
+    }                                                  // i.e., this is filling in the blank
   }  
 
-  if (doesItMatch) {
-    drawPlaySpace(playSpace);
-  } else {
-    guessesLeft--;
-    choseWrong(playerGuess);
-    drawWrongLetters();
+  if (doesItMatch) {                                // if it does match
+    drawPlaySpace(playSpace);                       // write it on the screen
+  } else {                                          // otherwise
+    guessesLeft--;                                  // you have one less guess
+    choseWrong(playerGuess);                        // and we add it to the wrong guess array
+    drawWrongLetters();                             // and then we print the array on the screen (It looks like we're printing one additional letter)
   }
-}
+} // end function
 
 // Function adds wrong guess to wrongLetters array and prints in 
 // #wrong-letters id
@@ -85,8 +87,18 @@ function choseWrong(badGuess) {
   console.log(wrongLetters);
 }
 
+// This puts the wrong letter array on the page
 function drawWrongLetters() {
   for (i = 0; i < wrongLetters.length; i++) {
     document.getElementById("wrong-letters").innerHTML = wrongLetters;
   }
 }
+
+/*
+ * Here's what I still need to do:
+ * 1. make guesses non-case sensitive
+ * 2. repeat wrong guesses don't count against score and don't decrease guesses left
+ * 3. only make wrong guesses count if they're letters (so exclude punctuation, numbers, etc.)
+ * 4. Something has to happen when you win
+ * 5. Somethign has to happen when you lose
+ */
