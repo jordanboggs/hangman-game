@@ -39,11 +39,13 @@ function drawBlanks(wordSelection) {
 var playSpace = drawBlanks(activeWord);
 
 // This function draws the playSpace array under #play-space
-function drawPlaySpace(arr) {
-  for (i = 0; i < arr.length; i++) {
-    document.getElementById("play-space").innerHTML += arr[i];
+function drawPlaySpace() {
+  for (i = 0; i < playSpace.length; i++) {
+    document.getElementById("play-space").innerHTML = playSpace.join('');
   }
 }
+
+drawPlaySpace();
 
 // Capture user's keypress
 document.onkeyup = function(event) {
@@ -71,13 +73,20 @@ function checkLetter (wordSelection, playerGuess) {
   } else {
     guessesLeft--;
     choseWrong(playerGuess);
+    drawWrongLetters();
   }
 }
 
-// Function adds wrong letter to wrongLetters array and prints in 
+// Function adds wrong guess to wrongLetters array and prints in 
 // #wrong-letters id
 function choseWrong(badGuess) {
   // Adds to wrongLetters array
   wrongLetters.push(badGuess);
   console.log(wrongLetters);
+}
+
+function drawWrongLetters() {
+  for (i = 0; i < wrongLetters.length; i++) {
+    document.getElementById("wrong-letters").innerHTML = wrongLetters;
+  }
 }
