@@ -10,11 +10,14 @@ var playerWins = 0;
 var playerLosses = 0;
 
 // Word bank for the RNG to pick from
-var wordBank = ['garnet',
-                'amethyst',
-                'pearl',
-                'steven',
-                'greg'];
+var wordBank = ['garnet', 'amethyst',
+                'pearl', 'steven',
+                'greg', 'peridot', 
+                'jasper', 'ruby', 
+                'sapphire', 'sardonyx',
+                'lars', 'connie',
+                'stevonnie', 'ronaldo',
+                'sadie', 'onion'];
 
 // number of guesses remaining for player
 var guessesLeft = 12;
@@ -64,8 +67,6 @@ function drawPlaySpace() {
 
 // Ok friends let's put them on the board _ _ _ _ !
 drawPlaySpace();
-
-
 
 // Capture user's keypress
 document.onkeyup = function(event) {
