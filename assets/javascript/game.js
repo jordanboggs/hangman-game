@@ -22,6 +22,22 @@ var guessesLeft = 12;
 // Array of letters that player has already guessed
 var wrongLetters = [];
 
+// Let's draw the wins, losses, and remaining guesses
+function displayWins() {
+  document.getElementById("player-wins").innerHTML = playerWins;
+}
+displayWins();
+
+function displayLosses() {
+  document.getElementById("player-losses").innerHTML = playerLosses;
+}
+displayLosses();
+
+function displayGuesses() {
+  document.getElementById("guesses-left").innerHTML = guessesLeft;
+}
+displayGuesses();
+
 // A variable that randomly picks a word from wordBank
 var activeWord = wordBank[Math.floor(Math.random() * wordBank.length)];
 console.log(activeWord);
@@ -49,6 +65,8 @@ function drawPlaySpace() {
 // Ok friends let's put them on the board _ _ _ _ !
 drawPlaySpace();
 
+
+
 // Capture user's keypress
 document.onkeyup = function(event) {
   var keyPress = event.key;
@@ -56,19 +74,21 @@ document.onkeyup = function(event) {
   keyPress = keyPress.toLowerCase();
   // Check if it's valid
   var validCharacters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+  var isValid = false;
   for (i = 0; i < validCharacters.length; i++) {
-    if (i === validCharacters[i]) {
-      // Check if it's a repeat
-      if (!isRepeat(keyPress)) {
-        checkLetter(activeWord, keyPress);                // Let's check to see if the guess was correct by comparing the Word to the keypress    
-      } else {
-        // the function already logs that it was a repeat
-      }
-    } else {
-      console.log("Character not valid");
+    if (keyPress === validCharacters[i]) {
+      isValid = true;
     }
   }
-};
+  if (isValid) {
+    // Check if it's a repeat
+    if (!isRepeat(keyPress)) {
+      checkLetter(activeWord, keyPress);             
+    } else {
+      console.log("keyPress was repeat, letter not checked against activeWord");
+    }
+  }
+}; // end keypress event
 
 // Checks to see if a guess is correct
 function checkLetter (wordSelection, playerGuess) {
@@ -77,19 +97,20 @@ function checkLetter (wordSelection, playerGuess) {
   
   var doesItMatch = false;
 
-  for (i = 0; i < wordSelection.length; i++) {      // for every character in the word, do this:
-    if (playerGuess === wordSelection[i]) {         // if the player's guess is the same as the (1st, 2nd, 3rd, etc.) character of the word:
-      doesItMatch = true;                           // mark it as true
-      playSpace[i] = playerGuess;                   // (1st, 2nd, 3rd, etc.) character is set to be the player's guess
-    }                                                  // i.e., this is filling in the blank
+  for (i = 0; i < wordSelection.length; i++) {      
+    if (playerGuess === wordSelection[i]) {         
+      doesItMatch = true;                           
+      playSpace[i] = playerGuess;                   
+    }                                                  
   }  
 
-  if (doesItMatch) {                                // if it does match
-    drawPlaySpace(playSpace);                       // write it on the screen
-  } else {                                          // otherwise
-    guessesLeft--;                                  // you have one less guess
-    choseWrong(playerGuess);                        // and we add it to the wrong guess array
-    drawWrongLetters();                             // and then we print the array on the screen (It looks like we're printing one additional letter)
+  if (doesItMatch) {                                
+    drawPlaySpace(playSpace);                     
+  } else {                                        
+    guessesLeft--;                               
+    choseWrong(playerGuess);                       
+    drawWrongLetters();        
+    displayGuesses();                     
   }
 } // end function
 
@@ -128,10 +149,11 @@ function isRepeat(guess) {
 
 /*
  * Here's what I still need to do:
- * 1. make guesses non-case sensitive
+ * 1. make guesses non-case sensitive                                   DONE
  * 2. repeat wrong guesses don't count                                  DONE
- *    don't count = don't reduce score and don't decrease guesses left
- * 3. only make wrong guesses count if they're letters
- * 4. Something has to happen when you win
- * 5. Somethign has to happen when you lose
+ * 3. only make wrong guesses count if they're letters                  DONE
+ * 4. Something has to happen when you win                              
+ * 5. Somethign has to happen when you lose                             
+ * 6. You forgot to display how many guesses are left                   DONE
+ * 7. You forgot to display wins and losses, the 0s do nothing          DONE
  */
