@@ -42,8 +42,13 @@ function displayGuesses() {
 displayGuesses();
 
 // A variable that randomly picks a word from wordBank
-var activeWord = wordBank[Math.floor(Math.random() * wordBank.length)];
+var activeWord = chooseWord();
 console.log(activeWord);
+
+function chooseWord() {
+  newWord = wordBank[Math.floor(Math.random() * wordBank.length)];
+  return newWord;
+}
 
 // A function that creates an array of blanks based on the word 
 // selection
@@ -101,17 +106,18 @@ function checkLetter (wordSelection, playerGuess) {
   for (i = 0; i < wordSelection.length; i++) {      
     if (playerGuess === wordSelection[i]) {         
       doesItMatch = true;                           
-      playSpace[i] = playerGuess;                   
+      playSpace[i] = playerGuess;
     }                                                  
   }  
 
   if (doesItMatch) {                                
-    drawPlaySpace(playSpace);                     
+    drawPlaySpace(playSpace);
+    checkWin();                       
   } else {                                        
-    guessesLeft--;                               
+    guessesLeft--;  
+    displayGuesses();                              
     choseWrong(playerGuess);                       
-    drawWrongLetters();        
-    displayGuesses();                     
+    drawWrongLetters();                       
   }
 } // end function
 
@@ -148,13 +154,56 @@ function isRepeat(guess) {
   return repeatLetter;
 } // end function
 
+// This function checks playSpace array for underscores. No underscores = win
+function checkWin() {
+  var winCondition = playSpace.length;
+  for (i=0; i<playSpace.length; i++) {
+    if (playSpace[i] != "_") {
+      winCondition--;
+      console.log("Spaces left: " + winCondition);
+    } else {
+      console.log("Spaces left: " + winCondition);
+    }
+  }
+  if (winCondition === 0) {
+    // wins increases by 1
+    playerWins++;
+    displayWins();
+    // a song plays?
+    // guesses remaining resets
+    guessesLeft = 12;
+    displayGuesses();
+    // a new word is chosen
+    activeWord = chooseWord();
+    // new blanks are drawn
+    playSpace = drawBlanks(activeWord);
+    drawPlaySpace();
+    // bank of guessed letters resets to empty
+    wrongLetters = [];
+    document.getElementById('wrong-letters').innerHTML = wrongLetters;
+  } else {
+    console.log("No win yet");
+  }
+}
+
 /*
  * Here's what I still need to do:
  * 1. make guesses non-case sensitive                                   DONE
  * 2. repeat wrong guesses don't count                                  DONE
  * 3. only make wrong guesses count if they're letters                  DONE
- * 4. Something has to happen when you win                              
- * 5. Somethign has to happen when you lose                             
+ * 4. Something has to happen when you win  
+ *    a. wins increases by 1
+ *    b. a song plays?
+ *    c. guesses remaining resets
+ *    d. new word is chosen
+ *    e. new blanks are drawn
+ *    f. bank of guessed letters resets to empty                           
+ * 5. Somethign has to happen when you lose
+ *    a. losses increases by 1
+ *    b. guesses remaining resets
+ *    c. new word is chosen
+ *    d. new blanks are drawn
+ *    e. bank of guessed letters resets to empty
  * 6. You forgot to display how many guesses are left                   DONE
  * 7. You forgot to display wins and losses, the 0s do nothing          DONE
  */
