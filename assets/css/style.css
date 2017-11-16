@@ -33,5 +33,6 @@ img.blur {
 }
 
 .hero-image {
-  visibility: hidden;
+  max-height: 400px;
+  display: none;
 }

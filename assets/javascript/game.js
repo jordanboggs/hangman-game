@@ -20,7 +20,7 @@ var wordBank = ['garnet', 'amethyst',
                 'sadie', 'onion'];
 
 // number of guesses remaining for player
-var guessesLeft = 12;
+var guessesLeft = 8;
 
 // Array of letters that player has already guessed
 var wrongLetters = [];
@@ -41,7 +41,7 @@ updateDisplay("wins");
 updateDisplay("losses");
 updateDisplay("guesses");
 
-document.getElementById("su-default").style.visibility = "visible";
+document.getElementById("su-default").style.display = "block";
 
 // A variable that randomly picks a word from wordBank
 var activeWord = chooseWord();
@@ -180,10 +180,10 @@ function checkWin() {
     
     for(var i = 0; i != heroImages.length; ++i)
     {
-    heroImages[i].style.visibility = "hidden";
+    heroImages[i].style.display = "none";
     }
 
-    document.getElementById(activeWord).style.visibility = "visible";
+    var newImage = document.getElementById(activeWord);newImage.style.display = "block";
 
     // Reset the game
     resetGame();
