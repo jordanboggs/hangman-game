@@ -11,33 +11,40 @@
 <body>
   <div class="container">
     <div class="row">
-      <h1>Hangman</h1>
+      <h1 class="text-center">Steven Universe Hangman</h1>
     </div>
     <div class="row">
-      <section id="scoreboard">
-        <h2> Scoreboard</h2>
-        <ul>
-          <li>Wins: <span id="player-wins"></span></li>
-          <li>Losses: <span id="player-losses"></span></li>
-        </ul>
+      <section id="char-picture" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <img src="./assets/images/su_default.png" alt="Steven Universe"/>
       </section>
-    </div>
-    <div class="row">
-      <section>
-        <h2>The word is...</h2>
-        <span id="play-space"></span>
-      </section>
-    </div>
-    <div class="row">
-      <section id="guess-space">
-        <div>
-          <h2>Guesses Left</h2>
-          <span id="guesses-left"></span>
+      <section id="main-game" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="row">
+          <section id="scoreboard">
+            <h2> Scoreboard</h2>
+            <ul>
+              <li>Wins: <span id="player-wins"></span></li>
+              <li>Losses: <span id="player-losses"></span></li>
+            </ul>
+          </section>
         </div>
-        <div>
-          <h2>Wrong Guesses</h2>
-          <span id="wrong-letters"></span>
+        <div class="row">
+          <section>
+            <h2>The word is...</h2>
+            <span id="play-space"></span>
+          </section>
         </div>
+        <div class="row">
+          <section id="guess-space">
+            <div>
+              <h2>Guesses Left</h2>
+              <span id="guesses-left"></span>
+            </div>
+            <div>
+              <h2>Wrong Guesses</h2>
+              <span id="wrong-letters"></span>
+            </div>
+          </section>
+        </div>  
       </section>
     </div>
   </div>
