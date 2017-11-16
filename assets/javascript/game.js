@@ -26,27 +26,27 @@ var guessesLeft = 12;
 var wrongLetters = [];
 
 // Let's draw the wins, losses, and remaining guesses
-function displayWins() {
-  document.getElementById("player-wins").innerHTML = playerWins;
-}
-displayWins();
-
-function displayLosses() {
-  document.getElementById("player-losses").innerHTML = playerLosses;
-}
-displayLosses();
-
-function displayGuesses() {
-  document.getElementById("guesses-left").innerHTML = guessesLeft;
-}
-displayGuesses();
+function updateDisplay(arg) {
+  if (arg === "wins") {
+    document.getElementById("player-wins").innerHTML = playerWins;
+  } else if (arg === "losses") {
+    document.getElementById("player-losses").innerHTML = playerLosses;
+  } else if (arg === "guesses") {
+    document.getElementById("guesses-left").innerHTML = guessesLeft;
+  } else {
+    console.log("invalid updateDisplay argument");
+  }
+} // end function
+updateDisplay("wins");
+updateDisplay("losses");
+updateDisplay("guesses");
 
 // A variable that randomly picks a word from wordBank
 var activeWord = chooseWord();
-console.log(activeWord);
 
 function chooseWord() {
   newWord = wordBank[Math.floor(Math.random() * wordBank.length)];
+  console.log(newWord);
   return newWord;
 }
 
@@ -115,9 +115,11 @@ function checkLetter (wordSelection, playerGuess) {
     checkWin();                       
   } else {                                        
     guessesLeft--;  
-    displayGuesses();                              
+    // displayGuesses();  
+    updateDisplay("guesses");                            
     choseWrong(playerGuess);                       
-    drawWrongLetters();                       
+    drawWrongLetters();
+    checkLoss();                       
   }
 } // end function
 
@@ -168,22 +170,41 @@ function checkWin() {
   if (winCondition === 0) {
     // wins increases by 1
     playerWins++;
-    displayWins();
-    // a song plays?
-    // guesses remaining resets
-    guessesLeft = 12;
-    displayGuesses();
-    // a new word is chosen
-    activeWord = chooseWord();
-    // new blanks are drawn
-    playSpace = drawBlanks(activeWord);
-    drawPlaySpace();
-    // bank of guessed letters resets to empty
-    wrongLetters = [];
-    document.getElementById('wrong-letters').innerHTML = wrongLetters;
-  } else {
-    console.log("No win yet");
+    // displayWins();
+    updateDisplay("wins");
+    
+    // Reset the game
+    resetGame();
   }
+}
+
+function checkLoss() {
+  if (guessesLeft <= 0) {
+    // Losses increases by 1
+    playerLosses++;
+    // displayLosses();
+    updateDisplay("losses");
+
+    // Reset the game
+    resetGame();
+  } else {
+    console.log("No loss yet");
+  }
+}
+
+function resetGame() {
+  // guesses remaining resets
+  guessesLeft = 12;
+  // displayGuesses();
+  updateDisplay("guesses");
+  // a new word is chosen
+  activeWord = chooseWord();
+  // new blanks are drawn
+  playSpace = drawBlanks(activeWord);
+  drawPlaySpace();
+  // bank of guessed letters resets to empty
+  wrongLetters = [];
+  document.getElementById('wrong-letters').innerHTML = wrongLetters;
 }
 
 /*
@@ -191,19 +212,19 @@ function checkWin() {
  * 1. make guesses non-case sensitive                                   DONE
  * 2. repeat wrong guesses don't count                                  DONE
  * 3. only make wrong guesses count if they're letters                  DONE
- * 4. Something has to happen when you win  
- *    a. wins increases by 1
- *    b. a song plays?
- *    c. guesses remaining resets
- *    d. new word is chosen
- *    e. new blanks are drawn
- *    f. bank of guessed letters resets to empty                           
- * 5. Somethign has to happen when you lose
- *    a. losses increases by 1
- *    b. guesses remaining resets
- *    c. new word is chosen
- *    d. new blanks are drawn
- *    e. bank of guessed letters resets to empty
+ * 4. Something has to happen when you win                              DONE
+ *    a. wins increases by 1                                            DONE
+ *    b. a song plays?               nah I think that's annoying so   NOT DONE                                                 
+ *    c. guesses remaining resets                                       DONE
+ *    d. new word is chosen                                             DONE
+ *    e. new blanks are drawn                                           DONE
+ *    f. bank of guessed letters resets to empty                        DONE
+ * 5. Somethign has to happen when you lose                             DONE  
+ *    a. losses increases by 1                                          DONE
+ *    b. guesses remaining resets                                       DONE
+ *    c. new word is chosen                                             DONE
+ *    d. new blanks are drawn                                           DONE
+ *    e. bank of guessed letters resets to empty                        DONE
  * 6. You forgot to display how many guesses are left                   DONE
  * 7. You forgot to display wins and losses, the 0s do nothing          DONE
  */
