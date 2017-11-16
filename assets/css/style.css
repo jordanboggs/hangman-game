@@ -1,0 +1,33 @@
+body {
+  background-color: #31eee0;
+  font-size: 24px;
+  color: #904247;
+}
+
+h1, h2 {
+  font-family: 'Fredoka One', cursive;
+  color: #ffff48;
+  text-shadow: -1px 0 #fc616f, 
+               0 1px #fc616f, 
+              1px 0 #fc616f, 
+              0 -1px #fc616f;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.2em;
+}
+
+#logo {
+  max-width: 50%;
+}
+
+img.blur {
+	width:367;
+	height:459px;
+	-webkit-filter: blur(3px);
+	filter: blur(3px);
+}
