@@ -31,3 +31,7 @@ img.blur {
 	-webkit-filter: blur(3px);
 	filter: blur(3px);
 }
+
+.hero-image {
+  visibility: hidden;
+}

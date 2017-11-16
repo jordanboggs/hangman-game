@@ -41,6 +41,8 @@ updateDisplay("wins");
 updateDisplay("losses");
 updateDisplay("guesses");
 
+document.getElementById("su-default").style.visibility = "visible";
+
 // A variable that randomly picks a word from wordBank
 var activeWord = chooseWord();
 
@@ -173,10 +175,22 @@ function checkWin() {
     // displayWins();
     updateDisplay("wins");
     
+    // update .hero-image
+    var heroImages = document.getElementsByClassName('hero-image');
+    
+    for(var i = 0; i != heroImages.length; ++i)
+    {
+    heroImages[i].style.visibility = "hidden";
+    }
+
+    document.getElementById(activeWord).style.visibility = "visible";
+
     // Reset the game
     resetGame();
+  } else {
+    console.log("No win yet");
   }
-}
+} // end function
 
 function checkLoss() {
   if (guessesLeft <= 0) {
