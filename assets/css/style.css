@@ -36,3 +36,7 @@ img.blur {
   max-height: 400px;
   display: none;
 }
+
+#key-press {
+  font-size: .8em;
+}
