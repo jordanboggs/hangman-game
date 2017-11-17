@@ -126,7 +126,7 @@ function checkLetter (wordSelection, playerGuess) {
     guessesLeft--;  
     // displayGuesses();  
     updateDisplay.guesses();                            
-    choseWrong(playerGuess);                       
+    choseWrong();                       
     drawWrongLetters();
     checkLoss();                       
   }
@@ -134,9 +134,9 @@ function checkLetter (wordSelection, playerGuess) {
 
 // Function adds wrong guess to wrongLetters array and prints in 
 // #wrong-letters id
-function choseWrong(badGuess) {
+function choseWrong() {
   // Adds to wrongLetters array
-  wrongLetters.push(badGuess);
+  wrongLetters.push(playerGuess);
   console.log(wrongLetters);
 }
 
