@@ -208,7 +208,7 @@ function checkLoss() {
 
 function resetGame() {
   // guesses remaining resets
-  guessesLeft = 12;
+  guessesLeft = 8;
   // displayGuesses();
   updateDisplay("guesses");
   // a new word is chosen
